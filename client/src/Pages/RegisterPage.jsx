@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function RegisterPage() {
   const [name, setName] = useState("");
@@ -7,6 +8,7 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
   function registerUser(e){
     e.preventDefault();
+    axios.get('http://localhost:3001/text');
     
   }
   return (

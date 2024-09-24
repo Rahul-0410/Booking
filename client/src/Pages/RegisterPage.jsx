@@ -6,9 +6,14 @@ function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  function registerUser(e){
+async function registerUser(e){
     e.preventDefault();
-    axios.get('http://localhost:3001/text');
+  await  axios.post('/register',{
+      name,
+      email,
+      password
+    });
+    alert('registered successfully');
     
   }
   return (

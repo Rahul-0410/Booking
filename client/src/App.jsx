@@ -4,6 +4,9 @@ import IndexPage from "./Pages/IndexPage";
 import LoginPage from "./Pages/LoginPage";
 import Layout from "./Layout";
 import RegisterPage from "./Pages/RegisterPage";
+import axios from "axios";
+
+axios.defaults.baseURL="http://localhost:3001"
 
 function App() {
   // hero icons used for all icons in jsx

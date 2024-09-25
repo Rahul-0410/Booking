@@ -5,6 +5,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const  User= require('./Models/User');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 mongoose.connect(process.env.MONGO_URL);
 const bcryptSalt= bcrypt.genSaltSync(10);
@@ -31,6 +32,25 @@ app.post('/register',async (req,res)=>{
         res.status(422).json(err);
     }
     // res.json(userDoc);
+})
+
+const jwtSecret='ye2td136e13e8723ydghewhfwetgjer'
+app.post('/login', async (req,res)=>{
+    const {email,password} = req.body;
+   const userDoc= await User.findOne({email});
+   if(userDoc){
+      const passOk= bcrypt.compareSync(password,userDoc.password);
+      if(passOk){
+        jwt.sign({email:userDoc.email, id:userDoc._id},jwtSecret,{},(err,token)=>{
+            if(err) throw err;
+            res.cookie('token',token).json('logged in');
+        })
+      } else{
+          res.status(401).json('wrong password');
+      }
+    } else{
+       res.status(404).json('not found');
+   }
 })
 
 app.listen(3001);

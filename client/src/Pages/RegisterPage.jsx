@@ -8,13 +8,17 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
 async function registerUser(e){
     e.preventDefault();
-  await  axios.post('/register',{
-      name,
-      email,
-      password
-    });
-    alert('registered successfully');
-    
+    try{
+      await  axios.post('/register',{
+        name,
+        email,
+        password
+      });
+      alert('registered successfully');  
+    } catch(err){
+      alert('error registering. try again later');
+    }
+  
   }
   return (
     <div className="mt-4 grow flex items-center justify-around">

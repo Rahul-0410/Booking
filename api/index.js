@@ -6,11 +6,13 @@ const mongoose = require('mongoose');
 const  User= require('./Models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 mongoose.connect(process.env.MONGO_URL);
 const bcryptSalt= bcrypt.genSaltSync(10);
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors({
     credentials: true,
     origin: 'http://localhost:5173',
@@ -51,6 +53,11 @@ app.post('/login', async (req,res)=>{
     } else{
        res.status(404).json('not found');
    }
+})
+
+app.get('/profile',async (req,res)=>{
+    const {token} = req.cookies;
+    res.json({token});
 })
 
 app.listen(3001);

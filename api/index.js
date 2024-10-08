@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
+    // origin: 'http://127.0.0.1:5173',
     origin: 'http://localhost:5173',
 }));
 
@@ -60,4 +61,4 @@ app.get('/profile',async (req,res)=>{
     res.json({token});
 })
 
-app.listen(3001);
+app.listen(4000);

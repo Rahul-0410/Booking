@@ -7,7 +7,7 @@ import RegisterPage from "./Pages/RegisterPage";
 import axios from "axios";
 import { UserContextProvider } from "./UserContext";
 
-axios.defaults.baseURL="http://localhost:3001"
+axios.defaults.baseURL="http://localhost:4000"
 axios.defaults.withCredentials=true;
 
 function App() {
